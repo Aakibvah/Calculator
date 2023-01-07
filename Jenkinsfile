@@ -20,15 +20,16 @@ pipeline{
         stage("Push image to repository"){
             steps{
                 withCredentials([usernameColonPassword(credentialsId: 'docker-pass', variable: 'docker')]) {
-                sh 'docker login -u aakibvah -p #{docker}'
+                sh 'docker login -u aakibvah -p ${docker}'
                 sh 'docker push aakibvah/calculator'  
                 }
-            }
-            
-    }
+            }        
+        }
+
     post{
         always{
             echo "========always========"
         }
     }
+}
 }
