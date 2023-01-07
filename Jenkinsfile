@@ -10,6 +10,12 @@ pipeline{
                 sh 'mvn clean install package'
             }
         }
+
+        stage("build Docker image"){
+            steps {
+                sh 'docker build -t aakibvah/calculator .'
+            }
+        }
     }
     post{
         always{
