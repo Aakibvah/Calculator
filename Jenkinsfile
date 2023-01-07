@@ -19,10 +19,11 @@ pipeline{
 
         stage("Push image to repository"){
             steps{
-                withCredentials([usernameColonPassword(credentialsId: 'docker-pass', variable: 'docker')]) {
-                sh 'docker login -u aakibvah -p ${docker}'
-                sh 'docker push aakibvah/calculator'  
+                withCredentials([string(credentialsId: 'dockerToken', variable: 'dockerToken')]) {     
+                    sh 'docker login -u aakibvah -p ${dockerToken}'
+                    sh 'docker push aakibvah/calculator'  
                 }
+                
             }        
         }
     }
