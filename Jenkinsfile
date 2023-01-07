@@ -18,10 +18,13 @@ pipeline{
         }
 
         stage("Push image to repository"){
-            withCredentials([usernameColonPassword(credentialsId: 'docker-pass', variable: 'docker')]) {
+            steps{
+                withCredentials([usernameColonPassword(credentialsId: 'docker-pass', variable: 'docker')]) {
                 sh 'docker login -u aakibvah -p #{docker}'
                 sh 'docker push aakibvah/calculator'  
+                }
             }
+            
     }
     post{
         always{
